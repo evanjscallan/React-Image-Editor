@@ -52,7 +52,7 @@ export default class Filter extends React.Component {
 						${this.props.hueParam}(${this.state.hueVal}deg)`,
 					}}
 					src={this.props.sourceImage}
-					alt="source image"
+					alt=""
 				/>
 				<ul className='sliderList'>
 					<li>
