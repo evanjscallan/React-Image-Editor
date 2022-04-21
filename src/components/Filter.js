@@ -1,6 +1,9 @@
 import React from "react";
 import "./../css/styles.css";
 
+
+
+
 export default class Filter extends React.Component {
 	constructor(props) {
 		super(props);
@@ -12,7 +15,7 @@ export default class Filter extends React.Component {
 			red1Val: 0,
 			blue1Val: 0,
 			green1Val: 0,
-		};
+	};
 		this.onSatChange = this.onSatChange.bind(this);
 		this.onContrastChange = this.onContrastChange.bind(this);
 		this.onBrightnessChange = this.onBrightnessChange.bind(this);
@@ -21,7 +24,10 @@ export default class Filter extends React.Component {
 		this.onBlue1Change = this.onBlue1Change.bind(this);
 		this.onGreen1Change = this.onGreen1Change.bind(this);
 		this.resetButton = this.resetButton.bind(this);
+	
 	}
+
+
 
 	onSatChange(e) {
 		document.querySelector("#mainImage");
@@ -73,7 +79,35 @@ export default class Filter extends React.Component {
 
 	}
 
+
+
+
+
 	render(props) {
+
+		const src = this.props.sourceImage
+
+		function downloadImage(src) {
+			console.log('clicked')
+			  const img = new Image();
+			  img.crossOrigin = 'anonymous';  // This tells the browser to request cross-origin access when trying to download the image data.
+			  // ref: https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image#Implementing_the_save_feature
+			  img.src = src
+			  img.onload = () => {
+			    // create Canvas
+			    const canvas = document.createElement('canvas');
+			    const ctx = canvas.getContext('2d');
+			    canvas.width = img.width;
+			    canvas.height = img.height;
+			    ctx.drawImage(img, 0, 0);
+			    // create a tag
+			    const a = document.createElement('a');
+			    a.download = 'download.jpg';
+			    a.href = canvas.toDataURL('image/jpg');
+			    a.click();
+			  };
+			}
+	
 		return (
 			<React.Fragment>
 			<svg
@@ -86,12 +120,12 @@ export default class Filter extends React.Component {
 				}}
 				xmlns="http://www.w3.org/2000/svg"
 				xmlnsXlink="http://www.w3.org/1999/xlink"
-				viewBox="0 0 1004 1024"
+				viewBox="0 0 444 250"
 			>
 				<defs>
 					<filter
 						id="Linear"
-						filterUnits="objectBoundingBox"
+						filterUnits="userSpaceOnUse"
 						x="0%"
 						y="0%"
 						width="100%"
@@ -117,9 +151,10 @@ export default class Filter extends React.Component {
 					</filter>
 				</defs>
 				<image
+					
 					xlinkHref={this.props.sourceImage}
-					width="1009px"
-					height="1048px"
+					width="100%"
+					height="100%"
 					filter="url(#Linear)"
 					transform="scale(1)"
 				/>
@@ -181,7 +216,11 @@ export default class Filter extends React.Component {
 						</li>
 					</ul>
 				</div>
+				<div className='button-box'>
 				<button onClick={this.resetButton}>Reset</button>
+				<button onClick={() => downloadImage(src)} src={src}>Export...</button>
+				</div>
+
 
 				<code>{/*EXPERIMENTAL*/}</code>
 				<ul className="sliderList">
@@ -267,5 +306,12 @@ A' | 0 0 0 1 0 |
 			                                                  0 0 1 0 0
 			                                                  1 0 0 1 1`} />
 			        </filter>
+
+*/
+
+
+/*
+
+
 
 */

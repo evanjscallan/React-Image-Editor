@@ -3,6 +3,8 @@ import Filter from './Filter'
 import './../css/styles.css'
 
 
+
+
 export default class Layout extends React.Component{
 
 	constructor(props){
@@ -15,12 +17,14 @@ export default class Layout extends React.Component{
 
 
 	render(props){
-		
+
 
 
 	return(
-		<div className='layout flex-row-ctr'>
-		<h1>Fire-Brick Luxroom</h1>
+		<div className='layout'>
+		<h1>Fire-Brick Luxroom&trade;</h1>
+
+
 			<Filter
 			satParam='saturate'
 			contrastParam='contrast'
@@ -34,4 +38,7 @@ export default class Layout extends React.Component{
 	}
 
 }
+
+
+
 
