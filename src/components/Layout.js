@@ -22,9 +22,9 @@ export default class Layout extends React.Component{
 
 	return(
 		<div className='layout'>
-		<h1>Fire-Brick Luxroom&trade;</h1>
+		
 
-
+		
 			<Filter
 			satParam='saturate'
 			contrastParam='contrast'

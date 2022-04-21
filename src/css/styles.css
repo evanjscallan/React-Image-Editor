@@ -5,21 +5,17 @@
 	padding: 1rem;
 	box-sizing: border-box;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
+	background-color: #FFFFF9;
 	height: 100vh;
-
-	
 	align-items: center;
-	
-	background-color: white;
 	color: black;
 }
 
 .button-box{
 
-	box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2),
-				2px 2px 2px 2px rgba(0,0,0,0.2),
-				4px 4px 4px 4px rgba(0,0,0,0.2);
+	border-radius: 5%;
+	
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -28,10 +24,18 @@
 }
 
 .button-box button{
+	background-color: #444452;
+	font-family: AdobeCleanUX-Regular;
+	width: 9rem;
+	height: 2rem;
+	color: #FFFFF9;
+	border: none;
+	cursor: pointer;
+	font-size: 1rem;
 	margin: .5rem;
-	box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.05),
-				2px 2px 2px 2px rgba(0,0,0,0.05),
-				4px 4px 4px 4px rgba(0,0,0,0.05);
+	box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1),
+				2px 2px 2px 2px rgba(0,0,0,0.1),
+				4px 4px 4px 4px rgba(0,0,0,0.1);
 
 }
 
@@ -45,22 +49,27 @@
 
 .sliderList{
 	list-style: none;
-	box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2),
-				2px 2px 2px 2px rgba(0,0,0,0.2),
-				4px 4px 4px 4px rgba(0,0,0,0.2);
+	background-color: #C5E9EE;
+	border: 1px solid black;
+	border-radius: 5%;
+	box-shadow: 1px 1px 1px rgba(0,0,0,0.2),
+				2px 2px 2px rgba(0,0,0,0.2),
+				4px 4px 4px rgba(0,0,0,0.2);
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin: 0 1rem 0 1rem;
+	margin: 1rem 1rem 1rem 1rem;
 	padding: 2rem;
-	max-height: 200px;
-	min-height: 200px;
+	box-sizing: border-box;
+	
+	height:300px;
 
 }
 
 h1 {
-	margin:  0
+	margin:  2rem;
+	font-size:  3rem;
 }
 
 .sliderList label{
@@ -75,9 +84,9 @@ h1 {
 
 
 .filterContainer{
-	width: 100%;
+	height: 100vh;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
 	margin: 0;
@@ -105,4 +114,94 @@ h1 {
 
 .slider-container input{
 	float: right;
+}
+
+input[type=range] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  width: 100%; /* Specific width is required for Firefox. */
+  background: transparent; /* Otherwise white in Chrome */
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+
+  /* Hides the slider so custom styles can be added */
+  background: transparent; 
+  border-color: transparent;
+  color: transparent;
+}
+
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background: #FFFFF9;
+  cursor: pointer;
+  margin-top: -4px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+}
+
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #444452;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #367ebd;
+}
+
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #444452;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px 0;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #2a6495;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #444452;
+}
+input[type=range]::-ms-fill-upper {
+  background: #444452;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #367ebd;
 }

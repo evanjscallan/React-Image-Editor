@@ -74,17 +74,13 @@ export default class Filter extends React.Component {
 			red1Val: 0,
 			blue1Val: 0,
 			green1Val: 0,
-
 		})
 
 	}
 
 
-
-
-
 	render(props) {
-
+		//NOT FUNCTIONING CURRENTLY.
 		const src = this.props.sourceImage
 
 		function downloadImage(src) {
@@ -110,6 +106,14 @@ export default class Filter extends React.Component {
 	
 		return (
 			<React.Fragment>
+			<div className='left-container'>
+			<h1>Fire-Brick Brightroom&trade;</h1>
+				<div className='button-box flex-row-ctr'>
+					<button className='flex-row-ctr' onClick={this.resetButton}>RESET</button>
+					<button className='flex-row-ctr' onClick={() => downloadImage(src)} src={src}>EXPORT...</button>
+				</div>
+			</div>
+
 			<svg
 				className='imageTest'
 				style={{
@@ -159,9 +163,9 @@ export default class Filter extends React.Component {
 					transform="scale(1)"
 				/>
 			</svg>
-			<div className='filterContainer'>
+			<div className='filterContainer flex-row-ctr'>
 				<div className="essentialEdits">
-					<ul className="sliderList">
+					<ul className="sliderList flex-row-ctr">
 						<h2>Basic Filters</h2>
 						<li>
 							<label for="sat" className="sliderlist">
@@ -216,10 +220,7 @@ export default class Filter extends React.Component {
 						</li>
 					</ul>
 				</div>
-				<div className='button-box'>
-				<button onClick={this.resetButton}>Reset</button>
-				<button onClick={() => downloadImage(src)} src={src}>Export...</button>
-				</div>
+				
 
 
 				<code>{/*EXPERIMENTAL*/}</code>
