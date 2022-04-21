@@ -20,7 +20,7 @@ export default class Layout extends React.Component{
 
 	return(
 		<div className='layout flex-row-ctr'>
-		<p>(Fairly Boring)</p><h1>Image Editor</h1>
+		<h1>Fire-Brick Luxroom</h1>
 			<Filter
 			satParam='saturate'
 			contrastParam='contrast'
