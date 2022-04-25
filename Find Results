@@ -1,0 +1,10 @@
+Searching 54 files for "index.js"
+
+/Users/Evan_Scallan/Git/image_edit/img2/image_editor_react/package.json:
+   52      ]
+   53    },
+   54:   "main": "index.tsx",
+   55    "repository": "https://github.com/evanjscallan/image_editor_react.git",
+   56    "author": "evanjscallan <evanjscallan@gmail.com>",
+
+1 match in 1 file
