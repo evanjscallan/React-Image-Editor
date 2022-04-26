@@ -1,6 +1,17 @@
-# Getting Started with Create React App
+## Application-Specific Instructions
+1. Follow the React/yarn instructions below to install the program/dependencies.
+2. Initialize the program on localhost:3000 or through the Netlify server.
+3. Utilize the image edit sliders to manipulate the photo.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Proposed Updates
+
+-Fix Import/Export Options
+
+-Added Color Channel Saturation sliders
+
+-URL importing
+
+-Waveform monitor/Histogram/Vectorscope GUI references
 
 ## Available Scripts
 
