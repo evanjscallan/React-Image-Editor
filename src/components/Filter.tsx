@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./../css/styles.css";
+import Image from './Image'
 
 
 interface Props {
@@ -13,7 +14,7 @@ interface Props {
 const Filter = ({ sourceImage, satParam, contrastParam, brightnessParam, hueParam }: Props): JSX.Element => {
 	const [satVal, setSatVal] = useState<number>(100);
 	const [brightnessVal, setBrightnessVal] = useState<number>(100);
-	const [contrastVal, setContrastVal] = useState<number>(150);
+	const [contrastVal, setContrastVal] = useState<number>(50);
 	const [hueVal, setHueVal] = useState<number>(0);
 	const [red1Val, setRed1Val] = useState<number>(0);
 	const [blue1Val, setBlue1Val] = useState<number>(0);
@@ -65,8 +66,23 @@ const Filter = ({ sourceImage, satParam, contrastParam, brightnessParam, huePara
 		setGreen1Val(0);
 	};
 
+
+
 	return (
 		<React.Fragment>
+		<Image
+		sat='saturate'
+		satVal={satVal}
+		contrast='contrast'
+		contrastVal={contrastVal}
+		brightness='brightness'
+		brightnessVal={brightnessVal}
+		hue='hue-rotate'
+		hueVal={hueVal}
+		red1Val={red1Val}
+		green1Val={green1Val}
+		blue1Val={blue1Val}
+		/>
 			<div className="left-container">
 				<h1>Fire-Brick Brightroom&trade;</h1>
 				<div className="button-box flex-row-ctr">
@@ -80,54 +96,7 @@ const Filter = ({ sourceImage, satParam, contrastParam, brightnessParam, huePara
 				</div>
 			</div>
 
-			<svg
-				className="imageTest"
-				style={{
-				filter: `${satParam}(${satVal}%)
-				${contrastParam}(${contrastVal}%)
-				${brightnessParam}(${brightnessVal}%)
-				${hueParam}(${hueVal}deg)`,
-				}}
-				xmlns="http://www.w3.org/2000/svg"
-				xmlnsXlink="http://www.w3.org/1999/xlink"
-				viewBox="0 0 444 250"
-			>
-				<defs>
-					<filter
-						id="Linear"
-						filterUnits="userSpaceOnUse"
-						x="0%"
-						y="0%"
-						width="100%"
-						height="100%"
-					>
-						<feComponentTransfer>
-							<feFuncR
-								type="linear"
-								slope="1"
-								intercept={red1Val}
-							/>
-							<feFuncG
-								type="linear"
-								slope="1"
-								intercept={-blue1Val}
-							/>
-							<feFuncB
-								type="linear"
-								slope="1"
-								intercept={-green1Val}
-							/>
-						</feComponentTransfer>
-					</filter>
-				</defs>
-				<image
-					xlinkHref={sourceImage}
-					width="100%"
-					height="100%"
-					filter="url(#Linear)"
-					transform="scale(1)"
-				/>
-			</svg>
+		
 			<div className="filterContainer flex-row-ctr">
 				<div className="essentialEdits">
 					<ul className="sliderList flex-row-ctr">
@@ -186,7 +155,6 @@ const Filter = ({ sourceImage, satParam, contrastParam, brightnessParam, huePara
 					</ul>
 				</div>
 
-				<code>{/*EXPERIMENTAL*/}</code>
 				<ul className="sliderList">
 					<h2>Color Channels</h2>
 
@@ -238,7 +206,9 @@ const Filter = ({ sourceImage, satParam, contrastParam, brightnessParam, huePara
 						/>
 					</li>
 				</ul>
+
 			</div>
+		
 		</React.Fragment>
 	);
 };
@@ -258,5 +228,57 @@ R' | 1 0 0 0 0 |
 G' | 0 1 0 0 0 |
 B' | 0 0 1 0 0 |
 A' | 0 0 0 1 0 |
+
+
+
+/*
+<svg
+	className="imageTest"
+	style={{
+	filter: `${satParam}(${satVal}%)
+	${contrastParam}(${contrastVal}%)
+	${brightnessParam}(${brightnessVal}%)
+	${hueParam}(${hueVal}deg)`,
+	}}
+	xmlns="http://www.w3.org/2000/svg"
+	xmlnsXlink="http://www.w3.org/1999/xlink"
+	viewBox="0 0 444 250"
+>
+	<defs>
+		<filter
+			id="Linear"
+			filterUnits="userSpaceOnUse"
+			x="0%"
+			y="0%"
+			width="100%"
+			height="100%"
+		>
+			<feComponentTransfer>
+				<feFuncR
+					type="linear"
+					slope="1"
+					intercept={red1Val}
+				/>
+				<feFuncG
+					type="linear"
+					slope="1"
+					intercept={-blue1Val}
+				/>
+				<feFuncB
+					type="linear"
+					slope="1"
+					intercept={-green1Val}
+				/>
+			</feComponentTransfer>
+		</filter>
+	</defs>
+	<image
+		xlinkHref={sourceImage}
+		width="100%"
+		height="100%"
+		filter="url(#Linear)"
+		transform="scale(1)"
+	/>
+</svg>
 
 */

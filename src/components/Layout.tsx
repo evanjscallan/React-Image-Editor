@@ -10,16 +10,9 @@ interface Props {
 }
 
 const Layout = (Props: any) => {
-		const [ sourceImage, setSourceImage ] = useState<string>(traceImage)
 	return(
 		<div className='layout'>	
-		<Filter
-			satParam='saturate'
-			contrastParam='contrast'
-			hueParam='hue-rotate'
-			brightnessParam='brightness'
-			sourceImage={sourceImage}		
-		/>
+		<Filter/>
 		</div>
 		)
 }
