@@ -1,30 +1,24 @@
-import React from "react";
+import React, { useState, useRef, ReactNode, forwardRef } from "react";
+import { exportComponentAsJPEG, exportComponentAsPDF, exportComponentAsPNG } from 'react-component-export-image';
 import "./../css/styles.css";
-import traceImage from './../img/trace.jpg'
+import testImage from './../img/test.jpg'
 
 
 
-export default class Image extends React.Component{
-	constructor(props){
-		super(props)
-		this.state = {
-			imageSrc: traceImage,
+
+const Image = (props) => (
+
+				<React.Fragment>
 			
-		}
-	}
-	render(props){
-		const { sourceImage } = this.state.imageSrc
-		const red1Val = this.props.red1Val
-		return(
-			<React.Fragment>
+				
 				<svg
-				id='mainImage'
+				
 				className="imageTest"
 				style={{
-				filter: `${this.props.sat}(${this.props.satVal}%)
-				${this.props.contrast}(${this.props.contrastVal}%)
-				${this.props.brightness}(${this.props.brightnessVal}%)
-				${this.props.hue}(${this.props.hueVal}deg)
+				filter: `${props.sat}(${props.satVal}%)
+				${props.contrast}(${props.contrastVal}%)
+				${props.brightness}(${props.brightnessVal}%)
+				${props.hue}(${props.hueVal}deg)
 				`}}
 				xmlns="http://www.w3.org/2000/svg"
 				xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -43,37 +37,31 @@ export default class Image extends React.Component{
 							<feFuncR
 								type="linear"
 								slope="1"
-								intercept={this.props.red1Val}
+								intercept={props.red1Val}
 							/>
 							<feFuncG
 								type="linear"
 								slope="1"
-								intercept={this.props.blue1Val}
+								intercept={props.blue1Val}
 							/>
 							<feFuncB
 								type="linear"
 								slope="1"
-								intercept={this.props.green1Val}
+								intercept={props.green1Val}
 							/>
 						</feComponentTransfer>
 					</filter>
 				</defs>
 				<image
-					xlinkHref={traceImage}
+					xlinkHref={testImage}
 					width="100%"
 					height="100%"
 					filter="url(#Linear)"
 					transform="scale(1)"
 				/>
-			</svg>
+
+			</svg>	
 			</React.Fragment>
 			)
-	}
 
-}
-
-/*
-
-	
-
-				*/
+export default Image

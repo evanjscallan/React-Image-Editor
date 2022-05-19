@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import "./../css/styles.css";
 import Image from './Image'
+import html2canvas from 'html2canvas';
+import { exportComponentAsJPEG, exportComponentAsPDF, exportComponentAsPNG } from 'react-component-export-image';
+import traceImage from './../img/trace.jpg'
+import * as htmlToImage from 'html-to-image';
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 
 
 interface Props {
@@ -19,6 +24,26 @@ const Filter = ({ sourceImage, satParam, contrastParam, brightnessParam, huePara
 	const [red1Val, setRed1Val] = useState<number>(0);
 	const [blue1Val, setBlue1Val] = useState<number>(0);
 	const [green1Val, setGreen1Val] = useState<number>(0);
+	const [imageState] = useState<string>('https://images.unsplash.com/photo-1516205651411-aef33a44f7c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80')
+
+
+	const ref = useRef<HTMLDivElement>(null)
+	const onButtonClick = useCallback(() => {
+	  if (ref.current === null) {
+	    return
+	  }
+
+	  toPng(ref.current, { cacheBust: true, })
+	    .then((dataUrl) => {
+	      const link = document.createElement('a')
+	      link.download = 'my-image-name.png'
+	      link.href = dataUrl
+	      link.click()
+	    })
+	    .catch((err) => {
+	      console.log(err)
+	    })
+	}, [ref])
 
 	const onSatChange = (e: number) => {
 		document.querySelector("#mainImage");
@@ -67,35 +92,36 @@ const Filter = ({ sourceImage, satParam, contrastParam, brightnessParam, huePara
 	};
 
 
+	const printImage = (imageState) => {
+		console.log('downloading...')
+		var dt = imageState
+		
+	}
+
+
+
 
 	return (
 		<React.Fragment>
-		<Image
-		sat='saturate'
-		satVal={satVal}
-		contrast='contrast'
-		contrastVal={contrastVal}
-		brightness='brightness'
-		brightnessVal={brightnessVal}
-		hue='hue-rotate'
-		hueVal={hueVal}
-		red1Val={red1Val}
-		green1Val={green1Val}
-		blue1Val={blue1Val}
-		/>
 			<div className="left-container">
 				<h1>Fire-Brick Brightroom&trade;</h1>
-				<div className="button-box flex-row-ctr">
-					<button className="flex-row-ctr" onClick={null}>
-						IMPORT
-					</button>
-					<button className="flex-row-ctr" onClick={resetButton}>
-						RESET
-					</button>
-					<button className="flex-row-ctr">EXPORT...</button>
+			
+					<Image
+						ref={ref}
+						sat='saturate'
+						satVal={satVal}
+						contrast='contrast'
+						contrastVal={contrastVal}
+						brightness='brightness'
+						brightnessVal={brightnessVal}
+						hue='hue-rotate'
+						hueVal={hueVal}
+						red1Val={red1Val}
+						green1Val={green1Val}
+						blue1Val={blue1Val}
+						source={imageState}
+						/>
 				</div>
-			</div>
-
 		
 			<div className="filterContainer flex-row-ctr">
 				<div className="essentialEdits">
@@ -207,6 +233,7 @@ const Filter = ({ sourceImage, satParam, contrastParam, brightnessParam, huePara
 					</li>
 				</ul>
 
+	
 			</div>
 		
 		</React.Fragment>
@@ -216,69 +243,17 @@ const Filter = ({ sourceImage, satParam, contrastParam, brightnessParam, huePara
 export default Filter;
 
 /*
-Color Matrix reference
-| R' |     | r1 r2 r3 r4 r5 |   | R |
-| G' |     | g1 g2 g3 g4 g5 |   | G |
-| B' |  =  | b1 b2 b3 b4 b5 | * | B |
-| A' |     | a1 a2 a3 a4 a5 |   | A |
-| 1  |     | 0  0  0  0  1 |   | 1 |
+				<div className="button-box flex-row-ctr">
+					<button className="flex-row-ctr" onClick={null}>
+						IMPORT
+					</button>
+					<button className="flex-row-ctr" onClick={resetButton}>
+						RESET
+					</button>
+					<button
+					onClick={onButtonClick}
+					className="flex-row-ctr">EXPORT...</button>
+				</div> 
+				*/
 
-     R G B A W
-R' | 1 0 0 0 0 |
-G' | 0 1 0 0 0 |
-B' | 0 0 1 0 0 |
-A' | 0 0 0 1 0 |
 
-
-
-/*
-<svg
-	className="imageTest"
-	style={{
-	filter: `${satParam}(${satVal}%)
-	${contrastParam}(${contrastVal}%)
-	${brightnessParam}(${brightnessVal}%)
-	${hueParam}(${hueVal}deg)`,
-	}}
-	xmlns="http://www.w3.org/2000/svg"
-	xmlnsXlink="http://www.w3.org/1999/xlink"
-	viewBox="0 0 444 250"
->
-	<defs>
-		<filter
-			id="Linear"
-			filterUnits="userSpaceOnUse"
-			x="0%"
-			y="0%"
-			width="100%"
-			height="100%"
-		>
-			<feComponentTransfer>
-				<feFuncR
-					type="linear"
-					slope="1"
-					intercept={red1Val}
-				/>
-				<feFuncG
-					type="linear"
-					slope="1"
-					intercept={-blue1Val}
-				/>
-				<feFuncB
-					type="linear"
-					slope="1"
-					intercept={-green1Val}
-				/>
-			</feComponentTransfer>
-		</filter>
-	</defs>
-	<image
-		xlinkHref={sourceImage}
-		width="100%"
-		height="100%"
-		filter="url(#Linear)"
-		transform="scale(1)"
-	/>
-</svg>
-
-*/

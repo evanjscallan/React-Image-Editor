@@ -19,6 +19,8 @@
 
 }
 
+
+
 .logo{
 	height: 100px;
 }
@@ -52,6 +54,11 @@ input[type="file"] {
 				2px 2px 2px 2px rgba(0,0,0,0.1),
 				4px 4px 4px 4px rgba(0,0,0,0.1);
 
+}
+
+.left-container{
+	display: flex;
+	flex-direction: column;
 }
 
 .flex-row-ctr{
