@@ -4,7 +4,6 @@ import hueScale from "./../img/hueScaleRefactored.png";
 import Image from "./Image";
 import fireBrickIcon from "./../img/Logo.png";
 
-
 interface Props {
 	satParam: string;
 	contrastParam: string;
@@ -22,7 +21,7 @@ const Filter = ({
 }: Props): JSX.Element => {
 	const [satVal, setSatVal] = useState<number>(100);
 	const [brightnessVal, setBrightnessVal] = useState<number>(100);
-	const [contrastVal, setContrastVal] = useState<number>(50);
+	const [contrastVal, setContrastVal] = useState<number>(100);
 	const [hueVal, setHueVal] = useState<number>(0);
 	const [red1Val, setRed1Val] = useState<number>(0);
 	const [blue1Val, setBlue1Val] = useState<number>(0);
@@ -82,12 +81,14 @@ const Filter = ({
 	return (
 		<React.Fragment>
 			<div className="left-container">
+				<div className='flex-row'>
 				<img
 					className="icon-main"
 					src={fireBrickIcon}
 					alt="logo icon"
 				/>
 				<h1>Fire-Brick Brightroom&trade;</h1>
+				</div>
 				<Image
 					ref={ref}
 					sat="saturate"
@@ -102,7 +103,7 @@ const Filter = ({
 					green1Val={green1Val}
 					blue1Val={blue1Val}
 					source={imageState}/>
-				<div className="button-box">
+				<div className="button-box adjust-up">
 					<button onClick={resetButton}>RESET</button>
 				</div>
 			</div>
