@@ -1,8 +1,9 @@
 import React, { useState, useRef } from "react";
 import "./../css/styles.css";
-import hueScale from './../img/hueScaleRefactored.png'
+import hueScale from "./../img/hueScaleRefactored.png";
 import Image from "./Image";
-import fireBrickIcon from './../img/Logo.png'
+import fireBrickIcon from "./../img/Logo.png";
+
 
 interface Props {
 	satParam: string;
@@ -17,7 +18,8 @@ const Filter = ({
 	satParam,
 	contrastParam,
 	brightnessParam,
-	hueParam }: Props): JSX.Element => {
+	hueParam,
+}: Props): JSX.Element => {
 	const [satVal, setSatVal] = useState<number>(100);
 	const [brightnessVal, setBrightnessVal] = useState<number>(100);
 	const [contrastVal, setContrastVal] = useState<number>(50);
@@ -77,11 +79,14 @@ const Filter = ({
 		setGreen1Val(0);
 	};
 
-
 	return (
 		<React.Fragment>
 			<div className="left-container">
-				<img className='icon-main' src={fireBrickIcon} alt='logo icon'/>
+				<img
+					className="icon-main"
+					src={fireBrickIcon}
+					alt="logo icon"
+				/>
 				<h1>Fire-Brick Brightroom&trade;</h1>
 				<Image
 					ref={ref}
@@ -97,10 +102,10 @@ const Filter = ({
 					green1Val={green1Val}
 					blue1Val={blue1Val}
 					source={imageState}/>
-			<div className='button-box'>
-				<button onClick={resetButton}>Reset</button>
+				<div className="button-box">
+					<button onClick={resetButton}>RESET</button>
+				</div>
 			</div>
-			</div>		
 			<div className="filterContainer flex-row-ctr">
 				<div className="essentialEdits">
 					<ul className="sliderList flex-row-ctr">
@@ -114,7 +119,8 @@ const Filter = ({
 								type="range"
 								max={200}
 								value={satVal}
-								onChange={(e) => onSatChange(e)}/>
+								onChange={(e) => onSatChange(e)}
+							/>
 						</li>
 						<li>
 							<label for="cont" className="sliderlist">
@@ -151,20 +157,19 @@ const Filter = ({
 								min={0}
 								value={hueVal}
 								onChange={(e) => onHueChange(e)}/>
-							
 						</li>
-						<img className='hueScale' src={hueScale} alt='hue scale'/>
+						<img
+							className="hueScale"
+							src={hueScale}
+							alt="hue scale"/>
 					</ul>
 				</div>
-
 				<ul className="sliderList">
 					<h2>Color Channels</h2>
-
 					<li>
 						<label for="red1" className="sliderlist">
 							Red
 						</label>
-
 						<input
 							id="red1"
 							type="range"
@@ -172,15 +177,12 @@ const Filter = ({
 							min={-1}
 							step={0.01}
 							value={red1Val}
-							onChange={(e) => onRed1Change(e)}
-						/>
+							onChange={(e) => onRed1Change(e)}/>
 					</li>
-
 					<li>
 						<label for="blue1" className="sliderlist">
 							Blue
 						</label>
-
 						<input
 							id="blue1"
 							type="range"
@@ -188,15 +190,12 @@ const Filter = ({
 							min={-1}
 							step={0.01}
 							value={blue1Val}
-							onChange={(e) => onBlue1Change(e)}
-						/>
+							onChange={(e) => onBlue1Change(e)}/>
 					</li>
-
 					<li>
 						<label for="green1" className="sliderlist">
 							Green
 						</label>
-
 						<input
 							id="green1"
 							type="range"
@@ -204,8 +203,7 @@ const Filter = ({
 							min={-1}
 							step={0.01}
 							value={green1Val}
-							onChange={(e) => onGreen1Change(e)}
-						/>
+							onChange={(e) => onGreen1Change(e)}/>
 					</li>
 				</ul>
 			</div>
@@ -215,16 +213,5 @@ const Filter = ({
 
 export default Filter;
 
-/*
-				<div className="button-box flex-row-ctr">
-					<button className="flex-row-ctr" onClick={null}>
-						IMPORT
-					</button>
-					<button className="flex-row-ctr" onClick={resetButton}>
-						RESET
-					</button>
-					<button
-					onClick={onButtonClick}
-					className="flex-row-ctr">EXPORT...</button>
-				</div> 
-				*/
+
+
