@@ -1,22 +1,23 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef } from "react";
 import "./../css/styles.css";
-import Image from './Image'
-import html2canvas from 'html2canvas';
-import { exportComponentAsJPEG, exportComponentAsPDF, exportComponentAsPNG } from 'react-component-export-image';
-import traceImage from './../img/trace.jpg'
-import * as htmlToImage from 'html-to-image';
-import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
-
+import hueScale from './../img/hueScaleRefactored.png'
+import Image from "./Image";
+import fireBrickIcon from './../img/Logo.png'
 
 interface Props {
-	satParam: string,
-	contrastParam: string,
-	brightnessParam: string,
-	hueParam: string,
-	sourceImage: string
+	satParam: string;
+	contrastParam: string;
+	brightnessParam: string;
+	hueParam: string;
+	sourceImage: string;
 }
 
-const Filter = ({ sourceImage, satParam, contrastParam, brightnessParam, hueParam }: Props): JSX.Element => {
+const Filter = ({
+	sourceImage,
+	satParam,
+	contrastParam,
+	brightnessParam,
+	hueParam }: Props): JSX.Element => {
 	const [satVal, setSatVal] = useState<number>(100);
 	const [brightnessVal, setBrightnessVal] = useState<number>(100);
 	const [contrastVal, setContrastVal] = useState<number>(50);
@@ -24,26 +25,11 @@ const Filter = ({ sourceImage, satParam, contrastParam, brightnessParam, huePara
 	const [red1Val, setRed1Val] = useState<number>(0);
 	const [blue1Val, setBlue1Val] = useState<number>(0);
 	const [green1Val, setGreen1Val] = useState<number>(0);
-	const [imageState] = useState<string>('https://images.unsplash.com/photo-1516205651411-aef33a44f7c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80')
+	const [imageState] = useState<string>(
+		"https://images.unsplash.com/photo-1516205651411-aef33a44f7c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
+	);
 
-
-	const ref = useRef<HTMLDivElement>(null)
-	const onButtonClick = useCallback(() => {
-	  if (ref.current === null) {
-	    return
-	  }
-
-	  toPng(ref.current, { cacheBust: true, })
-	    .then((dataUrl) => {
-	      const link = document.createElement('a')
-	      link.download = 'my-image-name.png'
-	      link.href = dataUrl
-	      link.click()
-	    })
-	    .catch((err) => {
-	      console.log(err)
-	    })
-	}, [ref])
+	const ref = useRef<HTMLDivElement>(null);
 
 	const onSatChange = (e: number) => {
 		document.querySelector("#mainImage");
@@ -84,7 +70,7 @@ const Filter = ({ sourceImage, satParam, contrastParam, brightnessParam, huePara
 		document.querySelector("#mainImage");
 		setSatVal(100);
 		setBrightnessVal(100);
-		setContrastVal(150);
+		setContrastVal(100);
 		setHueVal(0);
 		setRed1Val(0);
 		setBlue1Val(0);
@@ -92,37 +78,29 @@ const Filter = ({ sourceImage, satParam, contrastParam, brightnessParam, huePara
 	};
 
 
-	const printImage = (imageState) => {
-		console.log('downloading...')
-		var dt = imageState
-		
-	}
-
-
-
-
 	return (
 		<React.Fragment>
 			<div className="left-container">
+				<img className='icon-main' src={fireBrickIcon} alt='logo icon'/>
 				<h1>Fire-Brick Brightroom&trade;</h1>
-			
-					<Image
-						ref={ref}
-						sat='saturate'
-						satVal={satVal}
-						contrast='contrast'
-						contrastVal={contrastVal}
-						brightness='brightness'
-						brightnessVal={brightnessVal}
-						hue='hue-rotate'
-						hueVal={hueVal}
-						red1Val={red1Val}
-						green1Val={green1Val}
-						blue1Val={blue1Val}
-						source={imageState}
-						/>
-				</div>
-		
+				<Image
+					ref={ref}
+					sat="saturate"
+					satVal={satVal}
+					contrast="contrast"
+					contrastVal={contrastVal}
+					brightness="brightness"
+					brightnessVal={brightnessVal}
+					hue="hue-rotate"
+					hueVal={hueVal}
+					red1Val={red1Val}
+					green1Val={green1Val}
+					blue1Val={blue1Val}
+					source={imageState}/>
+			<div className='button-box'>
+				<button onClick={resetButton}>Reset</button>
+			</div>
+			</div>		
 			<div className="filterContainer flex-row-ctr">
 				<div className="essentialEdits">
 					<ul className="sliderList flex-row-ctr">
@@ -136,8 +114,7 @@ const Filter = ({ sourceImage, satParam, contrastParam, brightnessParam, huePara
 								type="range"
 								max={200}
 								value={satVal}
-								onChange={(e) => onSatChange(e)}
-							/>
+								onChange={(e) => onSatChange(e)}/>
 						</li>
 						<li>
 							<label for="cont" className="sliderlist">
@@ -146,11 +123,10 @@ const Filter = ({ sourceImage, satParam, contrastParam, brightnessParam, huePara
 							<input
 								id="cont"
 								type="range"
-								max={250}
-								min={50}
+								max={200}
+								min={0}
 								value={contrastVal}
-								onChange={(e) => onContrastChange(e)}
-							/>
+								onChange={(e) => onContrastChange(e)}/>
 						</li>
 						<li>
 							<label for="bright" className="sliderlist">
@@ -162,8 +138,7 @@ const Filter = ({ sourceImage, satParam, contrastParam, brightnessParam, huePara
 								max={200}
 								min={0}
 								value={brightnessVal}
-								onChange={(e) => onBrightnessChange(e)}
-							/>
+								onChange={(e) => onBrightnessChange(e)}/>
 						</li>
 						<li>
 							<label for="hue" className="sliderlist">
@@ -175,9 +150,10 @@ const Filter = ({ sourceImage, satParam, contrastParam, brightnessParam, huePara
 								max={360}
 								min={0}
 								value={hueVal}
-								onChange={(e) => onHueChange(e)}
-							/>
+								onChange={(e) => onHueChange(e)}/>
+							
 						</li>
+						<img className='hueScale' src={hueScale} alt='hue scale'/>
 					</ul>
 				</div>
 
@@ -232,10 +208,7 @@ const Filter = ({ sourceImage, satParam, contrastParam, brightnessParam, huePara
 						/>
 					</li>
 				</ul>
-
-	
 			</div>
-		
 		</React.Fragment>
 	);
 };
@@ -255,5 +228,3 @@ export default Filter;
 					className="flex-row-ctr">EXPORT...</button>
 				</div> 
 				*/
-
-
