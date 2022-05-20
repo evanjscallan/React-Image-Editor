@@ -113,8 +113,8 @@ export default class Image extends React.Component{
 		</svg>
 }
 		<form>
-		<div className='button-box'>
-		<label for="file">IMPORT...</label>
+		<div className='button-box importer'>
+		<label className='file' for="file">IMPORT...</label>
 		<input type='file' id='file' name='file' onChange={this.onImageChange} />
 		</div>
 		</form>
